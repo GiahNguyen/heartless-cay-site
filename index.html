@@ -267,6 +267,62 @@
       pointer-events: none;
     }
 
+    /* full-width horizon waves (the Leviathan Dock waterline) */
+    .hero-horizon {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 280px;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-horizon svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* each wave layer drifts at its own pace for parallax */
+    .wave-layer {
+      will-change: transform;
+    }
+
+    .wave-back {
+      animation: wave-drift-back 17s ease-in-out infinite alternate;
+    }
+
+    .wave-mid {
+      animation: wave-drift-mid 13s ease-in-out infinite alternate;
+    }
+
+    .wave-front {
+      animation: wave-drift-front 9s ease-in-out infinite alternate;
+    }
+
+    @keyframes wave-drift-back {
+      0%   { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-160px, -3px, 0); }
+    }
+
+    @keyframes wave-drift-mid {
+      0%   { transform: translate3d(-90px, 2px, 0); }
+      100% { transform: translate3d(110px, -2px, 0); }
+    }
+
+    @keyframes wave-drift-front {
+      0%   { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(-220px, 4px, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .wave-back, .wave-mid, .wave-front {
+        animation: none;
+      }
+    }
+
     /* obsidian vein SVG layer */
     .hero-veins {
       position: absolute;
@@ -719,6 +775,119 @@
   <!-- ── Hero ────────────────────────────────────────────────── -->
   <section class="hero" id="hero" aria-label="Hero">
 
+    <!-- full-width bottom horizon — Leviathan Dock waterline, animated waves -->
+    <div class="hero-horizon" aria-hidden="true">
+      <svg viewBox="0 0 1440 280" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- waves echo the obsidian center-bloom of the hero, kept very subtle -->
+          <linearGradient id="wave-back-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#0d2545" stop-opacity="0.06"/>
+            <stop offset="100%" stop-color="#0d2545" stop-opacity="0.14"/>
+          </linearGradient>
+          <linearGradient id="wave-mid-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#0d2545" stop-opacity="0.09"/>
+            <stop offset="100%" stop-color="#0d2545" stop-opacity="0.18"/>
+          </linearGradient>
+          <linearGradient id="wave-front-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#0d2545" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#0d2545" stop-opacity="0.24"/>
+          </linearGradient>
+          <linearGradient id="wave-rim" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"  stop-color="#1a4a7a" stop-opacity="0"/>
+            <stop offset="50%" stop-color="#1a4a7a" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#1a4a7a" stop-opacity="0"/>
+          </linearGradient>
+
+          <!-- faint crater-glow at the summit -->
+          <radialGradient id="crater-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#c8842a" stop-opacity="0.40"/>
+            <stop offset="60%"  stop-color="#8b5e00" stop-opacity="0.10"/>
+            <stop offset="100%" stop-color="#8b5e00" stop-opacity="0"/>
+          </radialGradient>
+          <!-- mist band shrouding the base -->
+          <linearGradient id="mist-band" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#0a0a0c" stop-opacity="0"/>
+            <stop offset="55%"  stop-color="#0a0a0c" stop-opacity="0.45"/>
+            <stop offset="100%" stop-color="#0a0a0c" stop-opacity="0"/>
+          </linearGradient>
+          <filter id="mist-blur">
+            <feGaussianBlur stdDeviation="1.2"/>
+          </filter>
+        </defs>
+
+        <!-- Briar Island — Mount Azazel, barely visible through the mist -->
+        <g class="island-layer" filter="url(#mist-blur)">
+          <path d="
+            M 720 140
+            L 758 122
+            L 790 112
+            L 820 100
+            L 845 86
+            L 862 74
+            L 875 68
+            L 888 80
+            L 906 92
+            L 932 104
+            L 968 116
+            L 1005 124
+            L 1040 132
+            L 1070 138
+            L 1100 140
+            Z"
+            fill="#1e1e24" opacity="0.16"/>
+
+          <!-- faintest crater glow at the summit — the only color cue -->
+          <ellipse cx="875" cy="72" rx="12" ry="5" fill="url(#crater-glow)" opacity="0.45"/>
+        </g>
+
+        <!-- mist band drifting across the island's base -->
+        <rect x="-100" y="115" width="1640" height="55" fill="url(#mist-band)" opacity="0.85"/>
+
+        <!-- back wave: highest, dimmest, slowest -->
+        <g class="wave-layer wave-back">
+          <path d="
+            M -400 130
+            C -200 100, 0 160, 200 130
+            S 600 100, 800 130
+            S 1200 160, 1400 130
+            S 1800 100, 2000 130
+            L 2000 280 L -400 280 Z"
+            fill="url(#wave-back-fill)"/>
+        </g>
+
+        <!-- mid wave -->
+        <g class="wave-layer wave-mid">
+          <path d="
+            M -400 175
+            C -180 140, 60 215, 280 175
+            S 720 135, 940 175
+            S 1380 215, 1600 175
+            S 2040 135, 2260 175
+            L 2260 280 L -400 280 Z"
+            fill="url(#wave-mid-fill)"/>
+        </g>
+
+        <!-- front wave: lowest, darkest, with a lit rim -->
+        <g class="wave-layer wave-front">
+          <path d="
+            M -400 220
+            C -160 195, 80 250, 320 220
+            S 800 175, 1040 220
+            S 1520 250, 1760 220
+            S 2240 175, 2480 220
+            L 2480 280 L -400 280 Z"
+            fill="url(#wave-front-fill)"/>
+          <path d="
+            M -400 220
+            C -160 195, 80 250, 320 220
+            S 800 175, 1040 220
+            S 1520 250, 1760 220
+            S 2240 175, 2480 220"
+            fill="none" stroke="url(#wave-rim)" stroke-width="1.2"/>
+        </g>
+      </svg>
+    </div>
+
     <!-- obsidian vein light system -->
     <div class="hero-veins" aria-hidden="true">
       <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -739,7 +908,6 @@
           <path d="M0 710 L310 605 L590 505 L720 432"/>
           <path d="M1440 690 L1150 585 L875 500 L720 432"/>
         </g>
-        <ellipse cx="720" cy="900" rx="820" ry="180" fill="#0d2545" opacity="0.30"/>
       </svg>
     </div>
 
