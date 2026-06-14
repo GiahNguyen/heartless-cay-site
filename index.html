@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>THE HEARTLESS CAY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" /></noscript>
+  <style>
+    /* ── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ── COLOR SYSTEM — THE HEARTLESS CAY ────────────────────── */
+    :root {
+      /* Backgrounds */
+      --color-basalt-black: #0a0a0c;
+      --color-basalt-dark:  #141418;
+      --color-basalt-mid:   #1e1e24;
+
+      /* Blue Obsidian */
+      --color-obsidian-deep:         #060d1a;
+      --color-obsidian-mid:          #0d2545;
+      --color-obsidian-glow:         #1a4a7a;
+      --color-obsidian-luminescence: #2a6aaa;
+
+      /* Industrial Metals */
+      --color-copper:      #b87333;
+      --color-copper-light:#cd8b3a;
+      --color-bronze:      #8b6914;
+      --color-brass-aged:  #c9a84c;
+      --color-steel:       #4a4a5a;
+
+      /* Crystal Amber */
+      --color-amber-dark:  #8b5e00;
+      --color-amber-mid:   #c8842a;
+      --color-amber-light: #f0b050;
+
+      /* Faction Accents */
+      --color-nightwing: #8b1a1a;
+      --color-beowulf:   #4a2a10;
+      --color-syndicate: #2a1a4a;
+
+      /* Typography */
+      --color-text-primary:   #e8dcc8;
+      --color-text-secondary: #a09080;
+      --color-text-accent:    #b87333;
+
+      /* Legacy aliases (nav unchanged) */
+      --basalt:        #0d0d0f;
+      --basalt-mid:    #13131a;
+      --basalt-lifted: #1a1a24;
+      --basalt-seam:   #22222f;
+      --obsidian-glow: #2a4a7a;
+      --obsidian-edge: #4d7fbf;
+      --amber:         #b8730a;
+      --amber-lit:     #d4900f;
+      --amber-pale:    #e8b84b;
+      --text-primary:  #c8bfa8;
+      --text-dim:      #7a7060;
+      --text-ghost:    #3a3530;
+
+      --nav-height: 64px;
+      --font-deco:  'Cinzel', serif;
+      --font-title: 'Cinzel Decorative', serif;
+      --font-body:  'Cormorant Garamond', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-basalt-black);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--color-basalt-black); }
+    ::-webkit-scrollbar-thumb { background: var(--color-obsidian-glow); border-radius: 3px; }
+
+    /* ── Navigation (unchanged) ───────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      background: linear-gradient(to bottom, rgba(13,13,15,0.97) 0%, rgba(13,13,15,0.88) 100%);
+      border-bottom: 1px solid var(--basalt-seam);
+      box-shadow: 0 1px 0 rgba(74,127,191,0.12), 0 4px 24px rgba(0,0,0,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 50%;
+      transform: translateX(-50%);
+      width: 160px; height: 2px;
+      background: linear-gradient(to right, transparent, var(--obsidian-edge), transparent);
+      opacity: 0.6;
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--text-primary);
+      text-decoration: none;
+      text-transform: uppercase;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-logo::before {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(to right, var(--obsidian-edge), var(--amber), var(--obsidian-edge));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-logo:hover { color: #fff; }
+    .nav-logo:hover::before { opacity: 1; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-deco);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0.5rem 0.85rem;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: calc(100% - 1.7rem);
+      height: 1px;
+      background: var(--obsidian-edge);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      opacity: 0;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
+
+    .nav-links .nav-cta a {
+      color: var(--amber);
+      border: 1px solid rgba(138,90,42,0.4);
+      border-radius: 1px;
+      padding: 0.45rem 0.9rem;
+      transition: color 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    }
+
+    .nav-links .nav-cta a:hover {
+      color: var(--amber-pale);
+      border-color: var(--amber);
+      background: rgba(138,90,42,0.1);
+      box-shadow: 0 0 12px rgba(212,144,15,0.15);
+    }
+
+    .nav-links .nav-cta a::after { display: none; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--text-dim);
+      transition: all 0.3s ease;
+    }
+
+    .nav-toggle:hover span { background: var(--obsidian-edge); }
+
+    /* ── Hero ─────────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      padding: var(--nav-height) 3rem 5rem;
+
+      /* basalt-black base */
+      background-color: var(--color-basalt-black);
+
+      /* industrial grating texture — very faint grid */
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 39px,
+          rgba(184, 115, 51, 0.04) 39px,
+          rgba(184, 115, 51, 0.04) 40px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          transparent,
+          transparent 39px,
+          rgba(184, 115, 51, 0.04) 39px,
+          rgba(184, 115, 51, 0.04) 40px
+        );
+    }
+
+    /* obsidian depth glow — center bloom */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 65% 55% at 50% 52%, rgba(13,37,69,0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 35% 28% at 50% 48%, rgba(26,74,122,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* vignette edges */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 100% 45% at 50% 0%,   rgba(10,10,12,0.85) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 38% at 50% 100%, rgba(10,10,12,0.92) 0%, transparent 50%),
+        radial-gradient(ellipse 28% 100% at 0%   50%, rgba(10,10,12,0.55) 0%, transparent 60%),
+        radial-gradient(ellipse 28% 100% at 100% 50%, rgba(10,10,12,0.55) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* obsidian vein SVG layer */
+    .hero-veins {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .hero-veins svg {
+      position: absolute;
+      width: 100%; height: 100%;
+    }
+
+    /* ── Art deco corner ornaments ────────────────────────────── */
+    .hero-corners {
+      position: absolute;
+      inset: calc(var(--nav-height) + 20px) 24px 24px 24px;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* each corner is a child div with ::before / ::after */
+    .hero-corner {
+      position: absolute;
+      width: 48px;
+      height: 48px;
+    }
+
+    .hero-corner--tl { top: 0;    left: 0; }
+    .hero-corner--tr { top: 0;    right: 0; transform: scaleX(-1); }
+    .hero-corner--bl { bottom: 0; left: 0;  transform: scaleY(-1); }
+    .hero-corner--br { bottom: 0; right: 0; transform: scale(-1); }
+
+    /* outer L */
+    .hero-corner::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 48px; height: 48px;
+      border-top: 1px solid var(--color-brass-aged);
+      border-left: 1px solid var(--color-brass-aged);
+      opacity: 0.55;
+    }
+
+    /* inner step — smaller L inset */
+    .hero-corner::after {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px;
+      width: 22px; height: 22px;
+      border-top: 1px solid var(--color-brass-aged);
+      border-left: 1px solid var(--color-brass-aged);
+      opacity: 0.3;
+    }
+
+    /* ── Hero Content ─────────────────────────────────────────── */
+    .hero-content {
+      position: relative;
+      z-index: 4;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .hero-title {
+      font-family: var(--font-title);
+      font-size: clamp(2rem, 5vw, 6.5rem);
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      line-height: 1;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+      margin-bottom: 0;
+
+      /* blue obsidian layered glow */
+      text-shadow:
+        0 0 2px  rgba(13,37,69,0.9),
+        0 0 20px rgba(13,37,69,0.7),
+        0 0 50px rgba(42,106,170,0.22),
+        0 0 90px rgba(42,106,170,0.10),
+        0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    /* ── Copper divider with diamond ─────────────────────────── */
+    .hero-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1.8rem auto;
+      width: 100%;
+      max-width: 560px;
+      gap: 0;
+    }
+
+    .hero-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--color-copper));
+    }
+
+    .hero-divider-line:last-child {
+      background: linear-gradient(to left, transparent, var(--color-copper));
+    }
+
+    /* diamond rendered with borders */
+    .hero-divider-gem {
+      flex-shrink: 0;
+      width: 9px;
+      height: 9px;
+      border: 1px solid var(--color-copper);
+      transform: rotate(45deg);
+      margin: 0 14px;
+      background: transparent;
+      box-shadow:
+        0 0 6px rgba(184,115,51,0.5),
+        inset 0 0 3px rgba(184,115,51,0.2);
+      position: relative;
+    }
+
+    /* inner dot */
+    .hero-divider-gem::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 3px; height: 3px;
+      background: var(--color-copper-light);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      font-style: italic;
+      letter-spacing: 0.12em;
+      color: var(--color-text-secondary);
+      line-height: 1.5;
+      margin-bottom: 3rem;
+    }
+
+    /* ── CTA Button ───────────────────────────────────────────── */
+    @keyframes btn-pulse {
+      0%   { box-shadow: 0 0 0   0   rgba(200,132,42,0.0),  0 0 16px rgba(184,115,51,0.15); }
+      50%  { box-shadow: 0 0 0   8px rgba(200,132,42,0.0),  0 0 28px rgba(240,176,80,0.30); }
+      100% { box-shadow: 0 0 0   16px rgba(200,132,42,0.0), 0 0 16px rgba(184,115,51,0.15); }
+    }
+
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-deco);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-text-primary);
+      text-decoration: none;
+      padding: 1rem 2.8rem;
+      border: 1px solid var(--color-copper);
+      background: transparent;
+      position: relative;
+      cursor: pointer;
+      transition: color 0.3s, background 0.3s;
+    }
+
+    /* outer frame tick-marks at corners */
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 3px; left: 3px; right: 3px; bottom: 3px;
+      border: 1px solid rgba(184,115,51,0.18);
+      transition: border-color 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: rgba(184,115,51,0.20);
+      animation: btn-pulse 1.6s ease-in-out infinite;
+    }
+
+    .btn-primary:hover::before {
+      border-color: rgba(184,115,51,0.35);
+    }
+
+    .btn-primary span { position: relative; z-index: 1; }
+
+    /* ── Hero dock label ──────────────────────────────────────── */
+    .hero-dock {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 4;
+      height: 72px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 1.4rem;
+      pointer-events: none;
+    }
+
+    .hero-dock-label {
+      font-family: var(--font-deco);
+      font-size: 0.5rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--text-ghost);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hero-dock-label::before,
+    .hero-dock-label::after {
+      content: '';
+      display: block;
+      width: 36px; height: 1px;
+      background: var(--text-ghost);
+    }
+
+    /* scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 1.8rem; right: 2.5rem;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .hero-scroll-track {
+      width: 1px; height: 44px;
+      background: linear-gradient(to bottom, var(--color-copper), transparent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-scroll-dot {
+      position: absolute;
+      top: 0; left: -2px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--color-copper);
+      animation: scroll-drop 2.2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-drop {
+      0%   { transform: translateY(0);    opacity: 1; }
+      80%  { transform: translateY(40px); opacity: 0; }
+      100% { transform: translateY(0);    opacity: 0; }
+    }
+
+    /* ── Species Strip ────────────────────────────────────────── */
+    .species-strip {
+      background: var(--color-basalt-dark);
+      border-top:    1px solid rgba(184,115,51,0.40);
+      border-bottom: 1px solid rgba(184,115,51,0.40);
+      padding: 0;
+    }
+
+    /* strip header */
+    .species-header {
+      text-align: center;
+      padding: 1.8rem 2rem 0;
+    }
+
+    .species-header-label {
+      font-family: var(--font-deco);
+      font-size: 0.52rem;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--color-copper);
+      opacity: 0.65;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .species-header-label::before,
+    .species-header-label::after {
+      content: '';
+      display: block;
+      width: 48px; height: 1px;
+      background: rgba(184,115,51,0.3);
+    }
+
+    /* grid */
+    .species-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      padding: 1.4rem 0 1.8rem;
+    }
+
+    /* each plate */
+    .species-plate {
+      padding: 1.4rem 1.6rem;
+      border-left: 2px solid var(--faction-color, var(--color-steel));
+      margin: 0.5rem 0.75rem;
+      background: transparent;
+      transition: background 0.2s ease;
+      position: relative;
+      text-align: left;
+    }
+
+    .species-plate:hover {
+      background: var(--color-basalt-mid);
+    }
+
+    /* separator between plates */
+    .species-plate + .species-plate::before {
+      content: '';
+      position: absolute;
+      left: -0.75rem;
+      top: 20%;
+      bottom: 20%;
+      width: 1px;
+      background: rgba(184,115,51,0.12);
+    }
+
+    .species-plate-name {
+      display: block;
+      font-family: var(--font-deco);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--color-text-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .species-plate-desc {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--color-text-secondary);
+      line-height: 1.35;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Coming soon placeholder ──────────────────────────────── */
+    .coming-soon {
+      min-height: 25vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1rem;
+      padding: 4rem 2rem;
+      background: linear-gradient(to bottom, var(--color-basalt-dark), var(--color-basalt-black));
+    }
+
+    .coming-soon-label {
+      font-family: var(--font-deco);
+      font-size: 0.55rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--text-ghost);
+    }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .species-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .species-plate + .species-plate::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 1.25rem; }
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(13,13,15,0.98);
+        border-bottom: 1px solid var(--basalt-seam);
+        padding: 0.5rem 0 1rem;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav-links.is-open { display: flex; }
+      .nav-links li { text-align: center; }
+
+      .nav-links a {
+        display: block;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.65rem;
+      }
+
+      .nav-links .nav-cta { margin-top: 0.5rem; padding: 0 1.5rem; }
+      .nav-links .nav-cta a { display: block; text-align: center; }
+
+      .hero { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+      .hero-title { letter-spacing: 0.04em; }
+      .hero-corners { inset: calc(var(--nav-height) + 10px) 12px 12px 12px; }
+      .hero-corner { width: 32px; height: 32px; }
+      .hero-corner::before { width: 32px; height: 32px; }
+      .hero-corner::after  { width: 14px; height: 14px; }
+      .hero-scroll { display: none; }
+
+      .species-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .species-plate {
+        padding: 1.1rem 1.2rem;
+        margin: 0.4rem 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-primary { padding: 0.9rem 2rem; font-size: 0.6rem; }
+      .species-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation (unchanged) ──────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Primary">
+    <a href="#" class="nav-logo" aria-label="The Heartless Cay — Home">THE HEARTLESS CAY</a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-list" role="list">
+      <li><a href="#map">Map</a></li>
+      <li><a href="#factions">Factions</a></li>
+      <li><a href="#characters">Characters</a></li>
+      <li><a href="#lore">Lore</a></li>
+      <li><a href="#glossary">Glossary</a></li>
+      <li class="nav-cta"><a href="#quiz">Species Quiz</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero" id="hero" aria-label="Hero">
+
+    <!-- obsidian vein light system -->
+    <div class="hero-veins" aria-hidden="true">
+      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="glow-center" cx="50%" cy="50%" r="38%">
+            <stop offset="0%"   stop-color="#1a4a7a" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#1a4a7a" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="vein-blur"><feGaussianBlur stdDeviation="2.5"/></filter>
+        </defs>
+        <ellipse cx="720" cy="440" rx="560" ry="360" fill="url(#glow-center)"/>
+        <g stroke="#1a4a7a" stroke-width="0.6" fill="none" opacity="0.14" filter="url(#vein-blur)">
+          <path d="M720 900 L690 610 L630 430 L710 210 L720 0"/>
+          <path d="M720 900 L755 585 L835 405 L755 185 L720 0"/>
+          <path d="M0 450 L290 432 L510 422 L720 432 L945 422 L1175 437 L1440 442"/>
+          <path d="M180 0 L370 205 L495 355 L605 455 L720 432"/>
+          <path d="M1260 0 L1070 215 L940 365 L845 462 L720 432"/>
+          <path d="M0 710 L310 605 L590 505 L720 432"/>
+          <path d="M1440 690 L1150 585 L875 500 L720 432"/>
+        </g>
+        <ellipse cx="720" cy="900" rx="820" ry="180" fill="#0d2545" opacity="0.30"/>
+      </svg>
+    </div>
+
+    <!-- art deco corner ornaments -->
+    <div class="hero-corners" aria-hidden="true">
+      <div class="hero-corner hero-corner--tl"></div>
+      <div class="hero-corner hero-corner--tr"></div>
+      <div class="hero-corner hero-corner--bl"></div>
+      <div class="hero-corner hero-corner--br"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">THE HEARTLESS CAY</h1>
+
+      <!-- copper divider with diamond -->
+      <div class="hero-divider" aria-hidden="true">
+        <div class="hero-divider-line"></div>
+        <div class="hero-divider-gem"></div>
+        <div class="hero-divider-line"></div>
+      </div>
+
+      <p class="hero-subtitle">Eight species. One island. No peace.</p>
+
+      <a href="#waitlist" class="btn-primary" role="button">
+        <span>Join the Waitlist</span>
+      </a>
+    </div>
+
+    <div class="hero-dock" aria-hidden="true">
+      <span class="hero-dock-label">Leviathan Dock</span>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-track">
+        <div class="hero-scroll-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Species Strip ───────────────────────────────────────── -->
+  <section class="species-strip" id="species" aria-label="Species of the Heartless Cay">
+    <div class="species-header">
+      <p class="species-header-label">Island Registry</p>
+    </div>
+
+    <div class="species-grid">
+
+      <div class="species-plate" style="--faction-color: var(--color-nightwing)">
+        <span class="species-plate-name">Vampires</span>
+        <span class="species-plate-desc">Blood law. Nocturnal sovereigns.</span>
+      </div>
+
+      <div class="species-plate" style="--faction-color: var(--color-beowulf)">
+        <span class="species-plate-name">Werewolves</span>
+        <span class="species-plate-desc">Wolf-formed. Pack-bound.</span>
+      </div>
+
+      <div class="species-plate" style="--faction-color: #4a8b3a">
+        <span class="species-plate-name">Avians</span>
+        <span class="species-plate-desc">Winged. Cliff-nested.</span>
+      </div>
+
+      <div class="species-plate" style="--faction-color: var(--color-obsidian-mid)">
+        <span class="species-plate-name">Sirens</span>
+        <span class="species-plate-desc">Coastal. Tidal.</span>
+      </div>
+
+      <div class="species-plate" style="--faction-color: #e8dcc8">
+        <span class="species-plate-name">Spirits</span>
+        <span class="species-plate-desc">Fallen. Formless.</span>
+      </div>
+
+      <div class="species-plate" style="--faction-color: var(--color-amber-mid)">
+        <span class="species-plate-name">Faeries</span>
+        <span class="species-plate-desc">Ancient. Displaced.</span>
+      </div>
+
+      <div class="species-plate" style="--faction-color: var(--color-steel)">
+        <span class="species-plate-name">Humans</span>
+        <span class="species-plate-desc">Last to arrive. Most desperate to stay.</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Placeholder (Phase 2 content lands here) ────────────── -->
+  <div class="coming-soon" aria-hidden="true">
+    <span class="coming-soon-label">Content pages — Phase 2</span>
+  </div>
+
+  <!-- ── Scripts (unchanged) ─────────────────────────────────── -->
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navList = document.getElementById('nav-list');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = navList.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+
+    navList.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navList.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+      });
+    });
+
+    const nav = document.querySelector('.nav');
+    const heroEl = document.querySelector('.hero');
+
+    const observer = new IntersectionObserver(
+      ([entry]) => nav.classList.toggle('nav--scrolled', !entry.isIntersecting),
+      { threshold: 0, rootMargin: `-${getComputedStyle(document.documentElement).getPropertyValue('--nav-height')} 0px 0px 0px` }
+    );
+    observer.observe(heroEl);
+  </script>
+</body>
+</html>
