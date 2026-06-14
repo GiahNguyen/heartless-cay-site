@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crystals — Lore — The Heartless Cay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" /></noscript>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Backgrounds */
+      --color-basalt-black: #0a0a0c;
+      --color-basalt-dark:  #141418;
+      --color-basalt-mid:   #1e1e24;
+
+      /* Blue Obsidian */
+      --color-obsidian-deep:         #060d1a;
+      --color-obsidian-mid:          #0d2545;
+      --color-obsidian-glow:         #1a4a7a;
+      --color-obsidian-luminescence: #2a6aaa;
+
+      /* Metals */
+      --color-copper:       #b87333;
+      --color-copper-light: #cd8b3a;
+      --color-bronze:       #8b6914;
+      --color-brass-aged:   #c9a84c;
+      --color-steel:        #4a4a5a;
+
+      /* Amber */
+      --color-amber-dark:  #8b5e00;
+      --color-amber-mid:   #c8842a;
+      --color-amber-light: #f0b050;
+
+      /* Faction accents */
+      --color-nightwing: #8b1a1a;
+      --color-beowulf:   #4a2a10;
+      --color-syndicate: #2a1a4a;
+
+      /* Type */
+      --color-text-primary:   #e8dcc8;
+      --color-text-secondary: #a09080;
+      --color-text-accent:    #b87333;
+
+      /* Legacy aliases reused by nav */
+      --basalt-seam:    #22222f;
+      --obsidian-edge:  #4d7fbf;
+      --amber:          #b8730a;
+      --amber-pale:     #e8b84b;
+      --text-primary:   #c8bfa8;
+      --text-dim:       #7a7060;
+      --text-ghost:     #3a3530;
+
+      --nav-height: 64px;
+      --font-deco:  'Cinzel', serif;
+      --font-title: 'Cinzel Decorative', serif;
+      --font-body:  'Cormorant Garamond', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--color-basalt-black);
+      color: var(--color-text-primary);
+      font-family: var(--font-body);
+      font-size: 18px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--color-basalt-black); }
+    ::-webkit-scrollbar-thumb { background: var(--color-obsidian-glow); border-radius: 3px; }
+
+    /* ── Navigation (same shell as home) ───────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      background: linear-gradient(to bottom, rgba(13,13,15,0.97) 0%, rgba(13,13,15,0.88) 100%);
+      border-bottom: 1px solid var(--basalt-seam);
+      box-shadow: 0 1px 0 rgba(74,127,191,0.12), 0 4px 24px rgba(0,0,0,0.6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .nav::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 50%;
+      transform: translateX(-50%);
+      width: 160px; height: 2px;
+      background: linear-gradient(to right, transparent, var(--obsidian-edge), transparent);
+      opacity: 0.6;
+    }
+
+    .nav-logo {
+      font-family: var(--font-title);
+      font-size: clamp(0.7rem, 2.5vw, 1.1rem);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--text-primary);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    .nav-logo:hover { color: #fff; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+    }
+
+    .nav-links a {
+      font-family: var(--font-deco);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0.5rem 0.85rem;
+      position: relative;
+      transition: color 0.25s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 50%;
+      transform: translateX(-50%) scaleX(0);
+      width: calc(100% - 1.7rem);
+      height: 1px;
+      background: var(--obsidian-edge);
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      opacity: 0;
+    }
+
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { transform: translateX(-50%) scaleX(1); opacity: 1; }
+
+    .nav-links a.is-active {
+      color: var(--color-copper);
+    }
+
+    .nav-links .nav-cta a {
+      color: var(--amber);
+      border: 1px solid rgba(138,90,42,0.4);
+      border-radius: 1px;
+      padding: 0.45rem 0.9rem;
+      transition: color 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    }
+
+    .nav-links .nav-cta a:hover {
+      color: var(--amber-pale);
+      border-color: var(--amber);
+      background: rgba(138,90,42,0.1);
+      box-shadow: 0 0 12px rgba(212,144,15,0.15);
+    }
+
+    .nav-links .nav-cta a::after { display: none; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 1px;
+      background: var(--text-dim);
+      transition: all 0.3s ease;
+    }
+
+    /* ── Page hero (compact) ───────────────────────────────── */
+    .page-hero {
+      position: relative;
+      padding: calc(var(--nav-height) + 5.5rem) 2rem 4rem;
+      min-height: 44vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background-color: var(--color-basalt-black);
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(184,115,51,0.04) 39px, rgba(184,115,51,0.04) 40px),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(184,115,51,0.04) 39px, rgba(184,115,51,0.04) 40px);
+    }
+
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 55% 70% at 50% 50%, rgba(13,37,69,0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 100% 35% at 50% 100%, rgba(10,10,12,0.85) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .page-hero-eyebrow {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-deco);
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--color-copper);
+      opacity: 0.85;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .page-hero-eyebrow::before,
+    .page-hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: rgba(184,115,51,0.3);
+    }
+
+    .page-hero-title {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-title);
+      font-size: clamp(2.4rem, 5.5vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      color: var(--color-text-primary);
+      text-transform: uppercase;
+      text-shadow:
+        0 0 2px  rgba(13,37,69,0.9),
+        0 0 20px rgba(13,37,69,0.7),
+        0 0 50px rgba(42,106,170,0.22),
+        0 2px 4px rgba(0,0,0,0.9);
+    }
+
+    .page-hero-rule {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1.6rem auto;
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .page-hero-rule-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--color-copper));
+    }
+
+    .page-hero-rule-line:last-child {
+      background: linear-gradient(to left, transparent, var(--color-copper));
+    }
+
+    .page-hero-rule-gem {
+      flex-shrink: 0;
+      width: 8px; height: 8px;
+      border: 1px solid var(--color-copper);
+      transform: rotate(45deg);
+      margin: 0 12px;
+      box-shadow: 0 0 6px rgba(184,115,51,0.5);
+    }
+
+    .page-hero-subtitle {
+      position: relative;
+      z-index: 1;
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: clamp(1rem, 1.8vw, 1.2rem);
+      color: var(--color-text-secondary);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Lore layout: sidebar + main ───────────────────────── */
+    .lore-layout {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 4rem 3rem 6rem;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    /* ── Sidebar ───────────────────────────────────────────── */
+    .lore-sidebar {
+      position: sticky;
+      top: calc(var(--nav-height) + 2rem);
+    }
+
+    .lore-sidebar-label {
+      font-family: var(--font-deco);
+      font-size: 0.55rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--color-copper);
+      opacity: 0.75;
+      margin-bottom: 1.4rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(184,115,51,0.25);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .lore-sidebar-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(184,115,51,0.15);
+    }
+
+    .lore-sidebar-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .lore-sidebar-list a {
+      display: block;
+      font-family: var(--font-deco);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      padding: 0.7rem 0.85rem 0.7rem 1.4rem;
+      border-left: 1px solid rgba(184,115,51,0.18);
+      position: relative;
+      transition: color 0.25s, border-color 0.25s, background 0.25s, padding-left 0.25s;
+    }
+
+    .lore-sidebar-list a::before {
+      content: '';
+      position: absolute;
+      left: -4px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      width: 5px; height: 5px;
+      background: var(--color-copper);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .lore-sidebar-list a:hover {
+      color: var(--color-copper);
+      border-left-color: var(--color-copper);
+      padding-left: 1.7rem;
+    }
+
+    .lore-sidebar-list a.is-active {
+      color: var(--color-amber-light);
+      border-left-color: var(--color-copper);
+      background: rgba(184,115,51,0.06);
+    }
+
+    .lore-sidebar-list a.is-active::before {
+      opacity: 1;
+    }
+
+    /* ── Main content ──────────────────────────────────────── */
+    .lore-main {
+      max-width: 760px;
+    }
+
+    .lore-section { margin-bottom: 3rem; }
+
+    .lore-section p {
+      color: var(--color-text-primary);
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    .lore-section p:last-child { margin-bottom: 0; }
+
+    /* Section heading: small caps copper, thin underline ending in a diamond */
+    .lore-section-heading {
+      font-family: var(--font-deco);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--color-copper);
+      margin-bottom: 1.8rem;
+      position: relative;
+      padding-bottom: 0.9rem;
+    }
+
+    .lore-section-heading::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 80px;
+      height: 1px;
+      background: var(--color-copper);
+    }
+
+    .lore-section-heading-diamond {
+      position: absolute;
+      left: 75px; bottom: -4px;
+      width: 8px; height: 8px;
+      border: 1px solid var(--color-copper);
+      background: var(--color-basalt-black);
+      transform: rotate(45deg);
+    }
+
+    /* Section divider between sections */
+    .lore-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 3.5rem auto;
+      max-width: 540px;
+    }
+
+    .lore-divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--color-copper));
+    }
+
+    .lore-divider-line:last-child {
+      background: linear-gradient(to left, transparent, var(--color-copper));
+    }
+
+    .lore-divider-gem {
+      flex-shrink: 0;
+      width: 9px; height: 9px;
+      border: 1px solid var(--color-copper);
+      transform: rotate(45deg);
+      margin: 0 14px;
+      box-shadow: 0 0 6px rgba(184,115,51,0.4);
+      position: relative;
+    }
+
+    .lore-divider-gem::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 3px; height: 3px;
+      background: var(--color-copper-light);
+    }
+
+    /* Pull quote — "bleeding the crystals" */
+    .lore-pullquote {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1.25rem;
+      color: var(--color-amber-light);
+      line-height: 1.5;
+      padding: 1.4rem 0 1.4rem 1.6rem;
+      margin: 1.6rem 0;
+      border-left: 2px solid var(--color-copper);
+      letter-spacing: 0.02em;
+    }
+
+    .lore-pullquote::before {
+      content: '“';
+      font-family: var(--font-title);
+      font-size: 1.6em;
+      color: var(--color-copper);
+      margin-right: 0.2em;
+      vertical-align: -0.2em;
+    }
+
+    /* ── Crystal data plates (Section 3) ───────────────────── */
+    .crystal-plates {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .crystal-plate {
+      background: var(--color-basalt-dark);
+      border: 1px solid rgba(184,115,51,0.15);
+      border-left: 3px solid var(--plate-color, var(--color-obsidian-glow));
+      padding: 1.2rem 1.4rem;
+      transition: background 0.25s, border-color 0.25s;
+      position: relative;
+    }
+
+    .crystal-plate:hover {
+      background: var(--color-basalt-mid);
+      border-color: rgba(184,115,51,0.3);
+    }
+
+    /* small geometric tick in top-right corner of each plate */
+    .crystal-plate::after {
+      content: '';
+      position: absolute;
+      top: 8px; right: 8px;
+      width: 14px; height: 14px;
+      border-top: 1px solid rgba(184,115,51,0.35);
+      border-right: 1px solid rgba(184,115,51,0.35);
+    }
+
+    .crystal-plate-name {
+      display: block;
+      font-family: var(--font-deco);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--color-text-accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .crystal-plate-desc {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--color-text-secondary);
+      line-height: 1.55;
+    }
+
+    /* ── Bottom callout box ───────────────────────────────── */
+    .lore-callout {
+      margin-top: 4rem;
+      padding: 2.4rem 2.6rem;
+      border: 1px solid var(--color-copper);
+      background: rgba(184,115,51,0.04);
+      text-align: center;
+      position: relative;
+    }
+
+    /* corner ornaments on the callout */
+    .lore-callout::before,
+    .lore-callout::after {
+      content: '';
+      position: absolute;
+      width: 22px; height: 22px;
+      border-top: 1px solid var(--color-copper-light);
+    }
+
+    .lore-callout::before {
+      top: -1px; left: -1px;
+      border-left: 1px solid var(--color-copper-light);
+    }
+
+    .lore-callout::after {
+      top: -1px; right: -1px;
+      border-right: 1px solid var(--color-copper-light);
+    }
+
+    .lore-callout-inner {
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .lore-callout-inner::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 8px; height: 8px;
+      border: 1px solid var(--color-copper);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .lore-callout-text {
+      font-family: var(--font-body);
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--color-text-primary);
+      line-height: 1.55;
+      letter-spacing: 0.02em;
+    }
+
+    .lore-callout-text strong {
+      font-style: normal;
+      font-weight: 400;
+      color: var(--color-amber-light);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Footer (shared) ──────────────────────────────────── */
+    .footer-strip {
+      background: linear-gradient(to bottom, var(--color-basalt-dark), var(--color-basalt-black));
+      border-top: 1px solid rgba(184,115,51,0.40);
+      padding: 3.5rem 3rem 0;
+    }
+
+    .footer-bottom {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1.4rem 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-colophon, .footer-credit {
+      font-family: var(--font-deco);
+      font-size: 0.5rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--text-ghost);
+    }
+
+    /* ── Responsive ───────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .lore-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3rem 1.5rem 4rem;
+      }
+
+      .lore-sidebar {
+        position: static;
+      }
+
+      .lore-sidebar-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.3rem 1rem;
+      }
+
+      .lore-main { max-width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 1.25rem; }
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: var(--nav-height);
+        left: 0; right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(13,13,15,0.98);
+        border-bottom: 1px solid var(--basalt-seam);
+        padding: 0.5rem 0 1rem;
+        backdrop-filter: blur(12px);
+      }
+
+      .nav-links.is-open { display: flex; }
+      .nav-links li { text-align: center; }
+      .nav-links a {
+        display: block;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.65rem;
+      }
+
+      .nav-links .nav-cta { margin-top: 0.5rem; padding: 0 1.5rem; }
+      .nav-links .nav-cta a { display: block; text-align: center; }
+
+      .page-hero { padding: calc(var(--nav-height) + 3.5rem) 1.5rem 3rem; }
+
+      .lore-sidebar-list {
+        grid-template-columns: 1fr;
+      }
+
+      .lore-callout { padding: 1.8rem 1.4rem; }
+      .lore-callout-text { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ────────────────────────────────────────── -->
+  <nav class="nav" role="navigation" aria-label="Primary">
+    <a href="../index.html" class="nav-logo" aria-label="The Heartless Cay — Home">THE HEARTLESS CAY</a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-list">
+      <span></span><span></span><span></span>
+    </button>
+
+    <ul class="nav-links" id="nav-list" role="list">
+      <li><a href="../index.html#map">Map</a></li>
+      <li><a href="../index.html#factions">Factions</a></li>
+      <li><a href="../index.html#characters">Characters</a></li>
+      <li><a href="crystals.html" class="is-active">Lore</a></li>
+      <li><a href="../index.html#glossary">Glossary</a></li>
+      <li class="nav-cta"><a href="../index.html#quiz">Species Quiz</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Page hero ─────────────────────────────────────────── -->
+  <header class="page-hero">
+    <div class="page-hero-eyebrow">Lore Archive</div>
+
+    <h1 class="page-hero-title">Crystals</h1>
+
+    <div class="page-hero-rule" aria-hidden="true">
+      <div class="page-hero-rule-line"></div>
+      <div class="page-hero-rule-gem"></div>
+      <div class="page-hero-rule-line"></div>
+    </div>
+
+    <p class="page-hero-subtitle">The island's most contested resource.</p>
+  </header>
+
+  <!-- ── Lore layout ───────────────────────────────────────── -->
+  <div class="lore-layout">
+
+    <!-- Sidebar -->
+    <aside class="lore-sidebar" aria-label="Lore navigation">
+      <div class="lore-sidebar-label">Lore Archive</div>
+      <ul class="lore-sidebar-list" role="list">
+        <li><a href="crystals.html" class="is-active" aria-current="page">Crystals</a></li>
+        <li><a href="geology.html">Geology</a></li>
+        <li><a href="currency.html">Currency</a></li>
+        <li><a href="factions.html">Factions</a></li>
+        <li><a href="species.html">Species</a></li>
+        <li><a href="glossary.html">Glossary</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main content -->
+    <main class="lore-main">
+
+      <!-- Section 1 -->
+      <section class="lore-section">
+        <h2 class="lore-section-heading">
+          What They Are
+          <span class="lore-section-heading-diamond" aria-hidden="true"></span>
+        </h2>
+        <p>
+          Crystals are Briar's most valuable natural resource and its most politically contested one. They form naturally inside the island's blue obsidian deposits and cannot be successfully replicated or sustained beyond Briar's borders. Every attempt to export a living crystal has ended the same way, the crystal goes dark within days of leaving the island's soil.
+        </p>
+        <p>
+          What reaches the human world is essentially a dying thing, still functional for a time, but cut off from the source that made it what it is.
+        </p>
+      </section>
+
+      <!-- Rule -->
+      <div class="lore-divider" aria-hidden="true">
+        <div class="lore-divider-line"></div>
+        <div class="lore-divider-gem"></div>
+        <div class="lore-divider-line"></div>
+      </div>
+
+      <!-- Section 2 -->
+      <section class="lore-section">
+        <h2 class="lore-section-heading">
+          How They Work
+          <span class="lore-section-heading-diamond" aria-hidden="true"></span>
+        </h2>
+        <p>
+          Crystals are not a fixed resource. They respond to their environment, to proximity to obsidian, to depth underground, to the supernatural energy density of their surroundings. The same crystal behaves differently in different parts of Briar. Separated from their natural context, they lose their responsive quality entirely. What humans study in laboratories is a crystal performing a fraction of what it actually is.
+        </p>
+        <p>
+          More significantly, crystals respond to people. To emotion. To intention. To supernaturals. Human scientists keep getting anomalous results because the crystal is responding to the researcher, not performing a fixed function.
+        </p>
+      </section>
+
+      <!-- Rule -->
+      <div class="lore-divider" aria-hidden="true">
+        <div class="lore-divider-line"></div>
+        <div class="lore-divider-gem"></div>
+        <div class="lore-divider-line"></div>
+      </div>
+
+      <!-- Section 3 — Light and Location -->
+      <section class="lore-section">
+        <h2 class="lore-section-heading">
+          Light and Location
+          <span class="lore-section-heading-diamond" aria-hidden="true"></span>
+        </h2>
+
+        <ul class="crystal-plates" role="list">
+
+          <li class="crystal-plate" style="--plate-color: #cfe6ff">
+            <span class="crystal-plate-name">Brimson · The Heartless Cay · St. Raphael's</span>
+            <span class="crystal-plate-desc">Blue-white, steady, sourceless. Cut and mounted in iron brackets. The crystal equivalent of fluorescent lighting.</span>
+          </li>
+
+          <li class="crystal-plate" style="--plate-color: var(--color-amber-mid)">
+            <span class="crystal-plate-name">The Beowulf Cavern</span>
+            <span class="crystal-plate-desc">Blue at the passages, warm amber in the depths. The closest thing the pack has to a natural sunrise.</span>
+          </li>
+
+          <li class="crystal-plate" style="--plate-color: var(--color-obsidian-luminescence)">
+            <span class="crystal-plate-name">The Enchanted Forest</span>
+            <span class="crystal-plate-desc">Floating, translucent, diamond-shaped. Casting light that does not behave the way light should. The most alive crystals on the island.</span>
+          </li>
+
+          <li class="crystal-plate" style="--plate-color: var(--color-bronze)">
+            <span class="crystal-plate-name">Ashfalls Factory Sector</span>
+            <span class="crystal-plate-desc">Amber-grey, dim, worn down. The workers call this <em>bleeding the crystals</em> — running them past their natural output until they go dark.</span>
+          </li>
+
+          <li class="crystal-plate" style="--plate-color: var(--color-obsidian-deep)">
+            <span class="crystal-plate-name">Mount Azazel</span>
+            <span class="crystal-plate-desc">The oldest and most powerful formations. Nobody fully understands why they behave the way they do.</span>
+          </li>
+
+        </ul>
+
+        <!-- Pull quote -->
+        <blockquote class="lore-pullquote">
+          Bleeding the crystals — running them past their natural output until they go dark.
+        </blockquote>
+      </section>
+
+      <!-- Rule -->
+      <div class="lore-divider" aria-hidden="true">
+        <div class="lore-divider-line"></div>
+        <div class="lore-divider-gem"></div>
+        <div class="lore-divider-line"></div>
+      </div>
+
+      <!-- Section 4 -->
+      <section class="lore-section">
+        <h2 class="lore-section-heading">
+          Who Controls Them
+          <span class="lore-section-heading-diamond" aria-hidden="true"></span>
+        </h2>
+        <p>
+          The Beowulf mine the crystals. The NightWing broker them. Ashfalls processes them. The human world buys them. The factory workers breathe the dust and receive none of the profit.
+        </p>
+        <p>
+          This arrangement is the economic core of Briar's generational conflict — not ideology, but money, control, and the indignation of watching something you built being used for something you never agreed to.
+        </p>
+      </section>
+
+      <!-- Bottom callout -->
+      <aside class="lore-callout" role="note">
+        <div class="lore-callout-inner">
+          <p class="lore-callout-text">
+            What the human world calls a power source, <strong>Briar calls a heart.</strong>
+          </p>
+        </div>
+      </aside>
+
+    </main>
+  </div>
+
+  <!-- ── Footer ───────────────────────────────────────────── -->
+  <footer class="footer-strip" role="contentinfo">
+    <div class="footer-bottom">
+      <span class="footer-colophon">© Briar — All Rights Reserved</span>
+      <span class="footer-credit">Built on Basalt &amp; Obsidian</span>
+    </div>
+  </footer>
+
+  <script>
+    const toggle = document.querySelector('.nav-toggle');
+    const navList = document.getElementById('nav-list');
+
+    toggle.addEventListener('click', () => {
+      const isOpen = navList.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen);
+      toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
+    });
+
+    navList.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navList.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>
