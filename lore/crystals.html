@@ -394,6 +394,34 @@
 
     .lore-section { margin-bottom: 3rem; }
 
+    /* In-text crystal illustration plate */
+    .lore-figure {
+      margin: 0.4rem auto 1.4rem;
+      text-align: center;
+    }
+
+    .lore-figure img {
+      display: block;
+      width: 100%;
+      max-width: 640px;
+      height: auto;
+      margin: 0 auto;
+      /* Glow + grounding shadow on the basalt */
+      filter:
+        drop-shadow(0 0 28px rgba(42, 106, 170, 0.22))
+        drop-shadow(0 6px 18px rgba(0, 0, 0, 0.6));
+    }
+
+    .lore-figure-caption {
+      display: block;
+      margin-top: 0.9rem;
+      font-family: var(--font-deco);
+      font-size: 0.5rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--text-ghost);
+    }
+
     .lore-section p {
       color: var(--color-text-primary);
       margin-bottom: 1.2rem;
@@ -443,6 +471,10 @@
       max-width: 540px;
     }
 
+    .lore-divider--tight {
+      margin-top: -1.6rem;
+    }
+
     .lore-divider-line {
       flex: 1;
       height: 1px;
@@ -480,7 +512,7 @@
       color: var(--color-amber-light);
       line-height: 1.5;
       padding: 1.4rem 0 1.4rem 1.6rem;
-      margin: 1.6rem 0;
+      margin: 1.6rem 0 0;
       border-left: 2px solid var(--color-copper);
       letter-spacing: 0.02em;
     }
@@ -505,7 +537,7 @@
     .crystal-plate {
       background: var(--color-basalt-dark);
       border: 1px solid rgba(184,115,51,0.15);
-      border-left: 3px solid var(--plate-color, var(--color-obsidian-glow));
+      border-left: 3px solid var(--color-amber-light);
       padding: 1.2rem 1.4rem;
       transition: background 0.25s, border-color 0.25s;
       position: relative;
@@ -549,7 +581,7 @@
     /* ── Bottom callout box ───────────────────────────────── */
     .lore-callout {
       margin-top: 4rem;
-      padding: 2.4rem 2.6rem;
+      padding: 3.8rem 2.6rem 2.2rem;
       border: 1px solid var(--color-copper);
       background: rgba(184,115,51,0.04);
       text-align: center;
@@ -759,6 +791,11 @@
         <p>
           What reaches the human world is essentially a dying thing, still functional for a time, but cut off from the source that made it what it is.
         </p>
+
+        <figure class="lore-figure">
+          <img src="img/briar_crystals_transparent.png" alt="A cluster of luminescent blue obsidian crystals rising from a basalt ridge, one solitary crystal in amber" loading="lazy" />
+          <figcaption class="lore-figure-caption">Field sketch · Crystal formation.</figcaption>
+        </figure>
       </section>
 
       <!-- Rule -->
@@ -778,7 +815,7 @@
           Crystals are not a fixed resource. They respond to their environment, to proximity to obsidian, to depth underground, to the supernatural energy density of their surroundings. The same crystal behaves differently in different parts of Briar. Separated from their natural context, they lose their responsive quality entirely. What humans study in laboratories is a crystal performing a fraction of what it actually is.
         </p>
         <p>
-          More significantly, crystals respond to people. To emotion. To intention. To supernaturals. Human scientists keep getting anomalous results because the crystal is responding to the researcher, not performing a fixed function.
+          More significantly, crystals respond to people. To emotion. To intention. To supernaturals.
         </p>
       </section>
 
@@ -798,27 +835,27 @@
 
         <ul class="crystal-plates" role="list">
 
-          <li class="crystal-plate" style="--plate-color: #cfe6ff">
-            <span class="crystal-plate-name">Brimson · The Heartless Cay · St. Raphael's</span>
+          <li class="crystal-plate">
+            <span class="crystal-plate-name">Brimson</span>
             <span class="crystal-plate-desc">Blue-white, steady, sourceless. Cut and mounted in iron brackets. The crystal equivalent of fluorescent lighting.</span>
           </li>
 
-          <li class="crystal-plate" style="--plate-color: var(--color-amber-mid)">
+          <li class="crystal-plate">
             <span class="crystal-plate-name">The Beowulf Cavern</span>
             <span class="crystal-plate-desc">Blue at the passages, warm amber in the depths. The closest thing the pack has to a natural sunrise.</span>
           </li>
 
-          <li class="crystal-plate" style="--plate-color: var(--color-obsidian-luminescence)">
+          <li class="crystal-plate">
             <span class="crystal-plate-name">The Enchanted Forest</span>
             <span class="crystal-plate-desc">Floating, translucent, diamond-shaped. Casting light that does not behave the way light should. The most alive crystals on the island.</span>
           </li>
 
-          <li class="crystal-plate" style="--plate-color: var(--color-bronze)">
-            <span class="crystal-plate-name">Ashfalls Factory Sector</span>
+          <li class="crystal-plate">
+            <span class="crystal-plate-name">Ashfalls</span>
             <span class="crystal-plate-desc">Amber-grey, dim, worn down. The workers call this <em>bleeding the crystals</em> — running them past their natural output until they go dark.</span>
           </li>
 
-          <li class="crystal-plate" style="--plate-color: var(--color-obsidian-deep)">
+          <li class="crystal-plate">
             <span class="crystal-plate-name">Mount Azazel</span>
             <span class="crystal-plate-desc">The oldest and most powerful formations. Nobody fully understands why they behave the way they do.</span>
           </li>
@@ -831,8 +868,8 @@
         </blockquote>
       </section>
 
-      <!-- Rule -->
-      <div class="lore-divider" aria-hidden="true">
+      <!-- Rule (tightened — sits right under the pull quote) -->
+      <div class="lore-divider lore-divider--tight" aria-hidden="true">
         <div class="lore-divider-line"></div>
         <div class="lore-divider-gem"></div>
         <div class="lore-divider-line"></div>
@@ -856,7 +893,7 @@
       <aside class="lore-callout" role="note">
         <div class="lore-callout-inner">
           <p class="lore-callout-text">
-            What the human world calls a power source, <strong>Briar calls a heart.</strong>
+            What the human world calls magic, <strong>Briar calls its heart.</strong>
           </p>
         </div>
       </aside>
